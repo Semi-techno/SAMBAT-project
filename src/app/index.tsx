@@ -2,7 +2,6 @@ import { useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
@@ -10,27 +9,22 @@ import {
 } from 'react-native';
 
 export default function LoginScreen() {
-  // State untuk Collecting Data
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  // State untuk UI & Validasi
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<{ username?: string; password?: string }>({});
 
-  // Fungsi Validasi Form Input
   const validateForm = (): boolean => {
     let currentErrors: { username?: string; password?: string } = {};
 
-    // Validasi Username
     if (!username.trim()) {
       currentErrors.username = 'Username tidak boleh kosong';
     } else if (username.length < 4) {
       currentErrors.username = 'Username minimal 4 karakter';
     }
 
-    // Validasi Password
     if (!password) {
       currentErrors.password = 'Password tidak boleh kosong';
     } else if (password.length < 6) {
@@ -38,12 +32,9 @@ export default function LoginScreen() {
     }
 
     setErrors(currentErrors);
-
-    // Jika objek errors kosong, berarti form valid
     return Object.keys(currentErrors).length === 0;
   };
 
-  // Handler Submit Form
   const handleLogin = () => {
     if (!validateForm()) {
       return;
@@ -51,7 +42,6 @@ export default function LoginScreen() {
 
     setIsLoading(true);
 
-    // Simulasi proses async / login ke server (1.5 detik)
     setTimeout(() => {
       setIsLoading(false);
       Alert.alert(
@@ -62,15 +52,20 @@ export default function LoginScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Selamat Datang</Text>
-      <Text style={styles.subtitle}>Silakan masukan akun Anda</Text>
+    <View className="flex-1 justify-center px-6 bg-[#F5F5F5]">
+      <Text className="text-3xl font-bold text-[#333] mb-2 text-center">
+        Selamat Datang
+      </Text>
+      <Text className="text-sm text-[#666] mb-8 text-center">
+        Silakan masukan akun Anda
+      </Text>
 
-      {/* Input Username */}
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Username</Text>
+      <View className="mb-4">
+        <Text className="text-sm text-[#333] mb-2 font-medium">Username</Text>
         <TextInput
-          style={[styles.input, errors.username ? styles.inputError : null]}
+          className={`bg-white border rounded-lg px-4 py-3 text-base ${
+            errors.username ? 'border-[#FF3B30]' : 'border-[#DDD]'
+          }`}
           placeholder="Masukkan username (min. 4 karakter)"
           value={username}
           onChangeText={(text) => {
@@ -79,16 +74,19 @@ export default function LoginScreen() {
           }}
           autoCapitalize="none"
         />
-        {errors.username && <Text style={styles.errorText}>{errors.username}</Text>}
+        {errors.username && (
+          <Text className="text-[#FF3B30] text-xs mt-1">{errors.username}</Text>
+        )}
       </View>
 
-      {/* Input Password */}
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Password</Text>
-        <View style={styles.passwordWrapper}>
+      <View className="mb-4">
+        <Text className="text-sm text-[#333] mb-2 font-medium">Password</Text>
+        <View className="relative justify-center">
           <TextInput
-            style={[styles.input, styles.passwordInput, errors.password ? styles.inputError : null]}
-            placeholder="Masukkan password (min. 6 karakter)"
+            className={`bg-white border rounded-lg pl-4 pr-24 py-3 text-base ${
+              errors.password ? 'border-[#FF3B30]' : 'border-[#DDD]'
+            }`}
+            placeholder="Masukkan password (min. 8 karakter)"
             value={password}
             onChangeText={(text) => {
               setPassword(text);
@@ -97,107 +95,32 @@ export default function LoginScreen() {
             secureTextEntry={!showPassword}
           />
           <TouchableOpacity 
-            style={styles.toggleButton} 
+            className="absolute right-3 p-2" 
             onPress={() => setShowPassword(!showPassword)}
           >
-            <Text style={styles.toggleText}>{showPassword ? 'Sembunyikan' : 'Lihat'}</Text>
+            <Text className="text-[#007AFF] text-xs font-semibold">
+              {showPassword ? 'Sembunyikan' : 'Lihat'}
+            </Text>
           </TouchableOpacity>
         </View>
-        {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
+        {errors.password && (
+          <Text className="text-[#FF3B30] text-xs mt-1">{errors.password}</Text>
+        )}
       </View>
 
-      {/* Tombol Submit */}
       <TouchableOpacity 
-        style={[styles.button, isLoading ? styles.buttonDisabled : null]} 
+        className={`py-3.5 rounded-lg items-center mt-4 ${
+          isLoading ? 'bg-[#A0A0A0]' : 'bg-[#007AFF]'
+        }`}
         onPress={handleLogin}
         disabled={isLoading}
       >
         {isLoading ? (
           <ActivityIndicator color="#FFFFFF" />
         ) : (
-          <Text style={styles.buttonText}>LOGIN</Text>
+          <Text className="text-white text-base font-bold">LOGIN</Text>
         )}
       </TouchableOpacity>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 24,
-    backgroundColor: '#F5F5F5',
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  subtitle: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 32,
-    textAlign: 'center',
-  },
-  inputContainer: {
-    marginBottom: 16,
-  },
-  label: {
-    fontSize: 14,
-    color: '#333',
-    marginBottom: 8,
-    fontWeight: '500',
-  },
-  input: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#DDD',
-    borderRadius: 8,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    fontSize: 16,
-  },
-  inputError: {
-    borderColor: '#FF3B30',
-  },
-  passwordWrapper: {
-    position: 'relative',
-    justifyContent: 'center',
-  },
-  passwordInput: {
-    paddingRight: 100,
-  },
-  toggleButton: {
-    position: 'absolute',
-    right: 12,
-    padding: 8,
-  },
-  toggleText: {
-    color: '#007AFF',
-    fontSize: 12,
-    fontWeight: '600',
-  },
-  errorText: {
-    color: '#FF3B30',
-    fontSize: 12,
-    marginTop: 4,
-  },
-  button: {
-    backgroundColor: '#007AFF',
-    paddingVertical: 14,
-    borderRadius: 8,
-    alignItems: 'center',
-    marginTop: 16,
-  },
-  buttonDisabled: {
-    backgroundColor: '#A0A0A0',
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-});
