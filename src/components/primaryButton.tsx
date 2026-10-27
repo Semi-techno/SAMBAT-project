@@ -9,7 +9,7 @@ export default function primaryButton({ title, onPress }: primaryButtonProps) {
   return (
     <TouchableOpacity
       onPress={onPress}
-      className="w-full py-3 bg-[#93110A] active:bg-[#7D0E08] rounded-xl shadow-sm items-center justify-center"
+      className="w-full py-3.5 bg-[#b33928] active:bg-[#9a2f20] rounded-xl shadow-sm items-center justify-center"
       activeOpacity={0.8}
     >
       <Text className="text-white text-sm font-semibold">{title}</Text>
