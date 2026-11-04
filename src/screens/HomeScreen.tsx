@@ -2,14 +2,23 @@ import { ScrollView, StatusBar, Text, TextInput, TouchableOpacity, View } from '
 import { SafeAreaView } from 'react-native-safe-area-context';
 import HeaderDecoration from '../components/HeaderDecoration';
 import {
-    BellIcon,
-    BusIcon,
-    PinIcon,
-    SearchIcon
+  BellIcon,
+  BusIcon,
+  CampusIcon,
+  HomeIcon,
+  MallIcon,
+  PinIcon,
+  SearchIcon
 } from '../components/Icons';
 import MapPreview from '../components/MapPreview';
 import { useAuth } from '../context/AuthContext';
-import { nearbyStops } from '../data/mockData';
+import { favoritePlaces, nearbyStops, type FavoritePlace } from '../data/mockData';
+
+const favoriteIcons: Record<FavoritePlace['icon'], typeof HomeIcon> = {
+  home: HomeIcon,
+  campus: CampusIcon,
+  mall: MallIcon,
+};
 
 export default function HomeScreen() {
   const { userName } = useAuth();
@@ -108,6 +117,28 @@ export default function HomeScreen() {
             <TouchableOpacity className="absolute bottom-3 right-3 rounded-full bg-[#b33928] px-4 py-2" activeOpacity={0.8}>
               <Text className="text-xs font-bold text-white">Buka peta</Text>
             </TouchableOpacity>
+          </View>
+        </View>
+
+        <View className="mt-6 px-5">
+          <Text className="mb-3 text-base font-extrabold text-gray-900">Tempat Favorit</Text>
+          <View className="flex-row gap-3">
+            {favoritePlaces.map((place) => {
+              const Icon = favoriteIcons[place.icon];
+              return (
+                <TouchableOpacity
+                  key={place.id}
+                  activeOpacity={0.8}
+                  className="flex-1 items-center rounded-2xl bg-white px-2 py-4"
+                  style={{ shadowColor: '#000', shadowOpacity: 0.08, shadowRadius: 12, shadowOffset: { width: 0, height: 4 }, elevation: 2 }}
+                >
+                  <View className="mb-2 h-12 w-12 items-center justify-center rounded-xl bg-[#b33928]/10">
+                    <Icon size={24} color={place.color} />
+                  </View>
+                  <Text className="text-sm font-bold text-[#b33928]">{place.label}</Text>
+                </TouchableOpacity>
+              );
+            })}
           </View>
         </View>
       </ScrollView>

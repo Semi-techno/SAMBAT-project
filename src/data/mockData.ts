@@ -3,6 +3,17 @@ export interface Stop {
   name: string;
   distance: number;
   eta: string;
+  lat: number;
+  lng: number;
+}
+
+export interface FavoritePlace {
+  id: string;
+  label: string;
+  icon: 'home' | 'campus' | 'mall';
+  color: string;
+  lat: number;
+  lng: number;
 }
 
 export interface Corridor {
@@ -53,14 +64,22 @@ export const currentUser = {
   avatar: 'https://i.pravatar.cc/150?img=12',
 };
 
+export const userLocation = { lat: -6.98444, lng: 110.42083 };
+
 export const nearbyStops: Stop[] = [
-  { id: 1, name: 'Halte Tentrem Gajahmada', distance: 180, eta: '5 mins left' },
-  { id: 2, name: 'Halte Simpang Lima', distance: 200, eta: '10 mins left' },
-  { id: 3, name: 'Halte Gramedia Pandanaran 1', distance: 400, eta: '8 mins left' },
-  { id: 4, name: 'Halte Gramedia Pandanaran 2', distance: 450, eta: '4 mins left' },
-  { id: 5, name: 'Halte BRT 2', distance: 650, eta: '12 mins left' },
-  { id: 6, name: 'Halte BRT 1', distance: 800, eta: '9 mins left' },
-  { id: 7, name: 'Halte Theresiana', distance: 900, eta: '15 mins left' },
+  { id: 1, name: 'Halte Tentrem Gajahmada', distance: 180, eta: '5 mins left', lat: -6.98361, lng: 110.42139 },
+  { id: 2, name: 'Halte Simpang Lima', distance: 200, eta: '10 mins left', lat: -6.98972, lng: 110.42306 },
+  { id: 3, name: 'Halte Gramedia Pandanaran 1', distance: 400, eta: '8 mins left', lat: -6.98778, lng: 110.41722 },
+  { id: 4, name: 'Halte Gramedia Pandanaran 2', distance: 450, eta: '4 mins left', lat: -6.98694, lng: 110.41583 },
+  { id: 5, name: 'Halte Pandanaran', distance: 650, eta: '12 mins left', lat: -6.98556, lng: 110.41389 },
+  { id: 6, name: 'Halte Tugu Muda', distance: 800, eta: '9 mins left', lat: -6.98389, lng: 110.40861 },
+  { id: 7, name: 'Halte Theresiana', distance: 900, eta: '15 mins left', lat: -6.99111, lng: 110.41944 },
+];
+
+export const favoritePlaces: FavoritePlace[] = [
+  { id: 'home', label: 'Rumah', icon: 'home', color: '#b33928', lat: -6.98444, lng: 110.42083 },
+  { id: 'campus', label: 'Kampus', icon: 'campus', color: '#b33928', lat: -6.97611, lng: 110.41528 },
+  { id: 'mall', label: 'Mall', icon: 'mall', color: '#b33928', lat: -6.98361, lng: 110.42250 },
 ];
 
 export const corridors: Corridor[] = [

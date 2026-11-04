@@ -176,6 +176,25 @@ export function LogoutIcon({ size = 20, color = '#111827' }: IconProps) {
   );
 }
 
+export function CampusIcon({ size = 24, color = '#111827' }: IconProps) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24">
+      <Path d="M2.5 9 12 4.5 21.5 9 12 13.5 2.5 9Z" stroke={color} strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <Path d="M6 10.8V15c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-4.2" stroke={color} strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <Path d="M21.5 9v4.5" stroke={color} strokeWidth={1.8} strokeLinecap="round" />
+    </Svg>
+  );
+}
+
+export function MallIcon({ size = 24, color = '#111827' }: IconProps) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24">
+      <Path d="M6 7h12l1 13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1L6 7Z" stroke={color} strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <Path d="M9 7V6a3 3 0 0 1 6 0v1" stroke={color} strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </Svg>
+  );
+}
+
 export function CheckBadgeIcon({ size = 20, color = '#111827' }: IconProps) {
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24">
