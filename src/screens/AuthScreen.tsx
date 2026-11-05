@@ -1,9 +1,10 @@
+import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { ScrollView, StatusBar, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { BusIcon, CheckBadgeIcon } from '../components/Icons';
 import InputField from '../components/inputField';
 import PrimaryButton from '../components/primaryButton';
-import { BusIcon, CheckBadgeIcon } from '../components/Icons';
 import { useAuth } from '../context/AuthContext';
 
 type Mode = 'login' | 'register';
@@ -56,7 +57,7 @@ export default function AuthScreen() {
 
   return (
     <View className="flex-1 bg-[#b33928]">
-      <StatusBar barStyle="light-content" backgroundColor="#b33928" />
+      <StatusBar style="light" />
       <SafeAreaView className="flex-1">
         <View className="items-center px-8 pt-6 pb-8">
           <View className="h-16 w-16 items-center justify-center rounded-2xl bg-white/15">

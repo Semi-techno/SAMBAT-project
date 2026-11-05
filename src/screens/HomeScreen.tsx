@@ -1,14 +1,15 @@
-import { ScrollView, StatusBar, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import HeaderDecoration from '../components/HeaderDecoration';
 import {
-  BellIcon,
-  BusIcon,
-  CampusIcon,
-  HomeIcon,
-  MallIcon,
-  PinIcon,
-  SearchIcon
+    BellIcon,
+    BusIcon,
+    CampusIcon,
+    HomeIcon,
+    MallIcon,
+    PinIcon,
+    SearchIcon
 } from '../components/Icons';
 import MapPreview from '../components/MapPreview';
 import { useAuth } from '../context/AuthContext';
@@ -25,7 +26,7 @@ export default function HomeScreen() {
 
   return (
     <View className="flex-1 bg-[#fdf6f3]">
-      <StatusBar barStyle="light-content" backgroundColor="#b33928" />
+      <StatusBar style="light" />
       <View className="overflow-hidden rounded-b-3xl bg-[#b33928] pb-14">
         <HeaderDecoration />
         <SafeAreaView edges={['top']}>
