@@ -51,8 +51,9 @@ export default function AuthScreen() {
       return;
     }
     const displayName = name.trim() || email.split('@')[0] || 'Pedro';
+    const displayEmail = email.trim();
     setSuccess(isLogin ? 'Login berhasil' : 'Registrasi berhasil');
-    setTimeout(() => login(displayName), 800);
+    setTimeout(() => login(displayName, displayEmail), 800);
   };
 
   return (
