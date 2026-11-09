@@ -173,3 +173,251 @@ export const formatRupiah = (value: number) => {
   const formatted = 'Rp' + abs.toLocaleString('id-ID');
   return value < 0 ? '-' + formatted : formatted;
 };
+
+export interface HalteChoice {
+  id: string;
+  name: string;
+  address: string;
+  corridors: string[];
+}
+
+export interface RecentSearchItem {
+  id: string;
+  title: string;
+  subtitle: string;
+  halteId: string;
+}
+
+export interface RouteHalteStep {
+  id: string;
+  name: string;
+  role: 'naik' | 'transit' | 'turun';
+  corridorBadge?: string;
+  badgeLabel?: string;
+}
+
+export interface RouteOptionItem {
+  id: string;
+  title: string;
+  price: number;
+  duration: string;
+  timeRange: string;
+  busChanges: number;
+  transitCount: number;
+  steps: RouteHalteStep[];
+}
+
+export const destinationHalteOptions: HalteChoice[] = [
+  {
+    id: 'binus-poj',
+    name: 'Binus University @POJ City',
+    address: 'Jl. POJ City, Tawangsari, Semarang Barat',
+    corridors: ['Koridor 5', 'Feeder PRPP'],
+  },
+  {
+    id: 'halte-theresiana',
+    name: 'Halte Theresiana',
+    address: 'Jl. Mayjen Sutoyo, Pekunden, Semarang Tengah',
+    corridors: ['Koridor 5', 'Koridor 3B'],
+  },
+  {
+    id: 'halte-simpang-lima',
+    name: 'Halte Simpang Lima',
+    address: 'Kawasan Simpang Lima, Semarang Selatan',
+    corridors: ['Koridor 1', 'Koridor 3A', 'Koridor 4', 'Koridor 5'],
+  },
+  {
+    id: 'halte-prpp',
+    name: 'Halte PRPP',
+    address: 'Jl. Puri Anjasmoro, Tawang Mas, Semarang Barat',
+    corridors: ['Koridor 5', 'Feeder POJ City'],
+  },
+  {
+    id: 'halte-tentrem',
+    name: 'Halte Tentrem Gajahmada',
+    address: 'Jl. Gajahmada No. 123, Pekunden, Semarang Tengah',
+    corridors: ['Koridor 3A', 'Koridor 3B'],
+  },
+  {
+    id: 'halte-tugu-muda',
+    name: 'Halte Tugu Muda',
+    address: 'Bundaran Tugu Muda, Pendrikan Kidul, Semarang Tengah',
+    corridors: ['Koridor 1', 'Koridor 2', 'Koridor 4', 'Koridor 5'],
+  },
+  {
+    id: 'halte-pandanaran',
+    name: 'Halte Pandanaran',
+    address: 'Jl. Pandanaran, Mugassari, Semarang Selatan',
+    corridors: ['Koridor 1', 'Koridor 8'],
+  },
+  {
+    id: 'halte-gramedia',
+    name: 'Halte Gramedia Pandanaran 1',
+    address: 'Jl. Pandanaran No. 122, Pekunden',
+    corridors: ['Koridor 1', 'Koridor 5'],
+  },
+];
+
+export const recentSearches: RecentSearchItem[] = [
+  {
+    id: 'recent-binus',
+    title: 'Binus University @POJ City',
+    subtitle: 'Jl. POJ City, Tawangsari, Semarang Barat, Kota Semarang, Jawa Tengah',
+    halteId: 'binus-poj',
+  },
+];
+
+export const getRouteOptionsForDestination = (destName: string): RouteOptionItem[] => {
+  const isBinus = destName.toLowerCase().includes('binus') || destName.toLowerCase().includes('poj');
+
+  if (isBinus) {
+    return [
+      {
+        id: 'rute-1',
+        title: 'Via Halte Theresiana',
+        price: 3500,
+        duration: '1 jam 12 menit',
+        timeRange: '13.23 - 14.35',
+        busChanges: 2,
+        transitCount: 1,
+        steps: [
+          {
+            id: 's1',
+            name: 'Halte Theresiana',
+            role: 'naik',
+            corridorBadge: 'BRT Koridor 5 arah PRPP',
+          },
+          {
+            id: 's2',
+            name: 'Halte PRPP',
+            role: 'transit',
+            badgeLabel: 'Transit',
+            corridorBadge: 'Feeder arah POJ City',
+          },
+          {
+            id: 's3',
+            name: 'Binus University @POJ City',
+            role: 'turun',
+            badgeLabel: 'Halte Tujuan',
+          },
+        ],
+      },
+      {
+        id: 'rute-2',
+        title: 'Via Halte Simpang Lima',
+        price: 3500,
+        duration: '1 jam 25 menit',
+        timeRange: '13.23 - 14.48',
+        busChanges: 2,
+        transitCount: 1,
+        steps: [
+          {
+            id: 's2-1',
+            name: 'Halte Simpang Lima',
+            role: 'naik',
+            corridorBadge: 'BRT Koridor 5 arah PRPP',
+          },
+          {
+            id: 's2-2',
+            name: 'Halte PRPP',
+            role: 'transit',
+            badgeLabel: 'Transit',
+            corridorBadge: 'Feeder arah POJ City',
+          },
+          {
+            id: 's2-3',
+            name: 'Binus University @POJ City',
+            role: 'turun',
+            badgeLabel: 'Halte Tujuan',
+          },
+        ],
+      },
+      {
+        id: 'rute-3',
+        title: 'Via Halte Tentrem & Tugu Muda',
+        price: 3500,
+        duration: '1 jam 35 menit',
+        timeRange: '13.30 - 15.05',
+        busChanges: 2,
+        transitCount: 1,
+        steps: [
+          {
+            id: 's3-1',
+            name: 'Halte Tentrem Gajahmada',
+            role: 'naik',
+            corridorBadge: 'BRT Koridor 3A arah Pemuda',
+          },
+          {
+            id: 's3-2',
+            name: 'Halte Tugu Muda',
+            role: 'transit',
+            badgeLabel: 'Transit',
+            corridorBadge: 'BRT Koridor 5 arah PRPP',
+          },
+          {
+            id: 's3-3',
+            name: 'Binus University @POJ City',
+            role: 'turun',
+            badgeLabel: 'Halte Tujuan',
+          },
+        ],
+      },
+    ];
+  }
+
+  return [
+    {
+      id: 'rute-direct',
+      title: `Langsung ke ${destName}`,
+      price: 3500,
+      duration: '35 menit',
+      timeRange: '13.20 - 13.55',
+      busChanges: 1,
+      transitCount: 0,
+      steps: [
+        {
+          id: 'fb-1',
+          name: 'Halte Tentrem Gajahmada',
+          role: 'naik',
+          corridorBadge: 'BRT Koridor 3A',
+        },
+        {
+          id: 'fb-2',
+          name: destName,
+          role: 'turun',
+          badgeLabel: 'Halte Tujuan',
+        },
+      ],
+    },
+    {
+      id: 'rute-transit',
+      title: `Via Transit Simpang Lima ke ${destName}`,
+      price: 3500,
+      duration: '48 menit',
+      timeRange: '13.25 - 14.13',
+      busChanges: 2,
+      transitCount: 1,
+      steps: [
+        {
+          id: 'fb-3',
+          name: 'Halte Simpang Lima',
+          role: 'naik',
+          corridorBadge: 'BRT Koridor 1',
+        },
+        {
+          id: 'fb-4',
+          name: 'Halte Tugu Muda',
+          role: 'transit',
+          badgeLabel: 'Transit',
+          corridorBadge: 'BRT Koridor 5',
+        },
+        {
+          id: 'fb-5',
+          name: destName,
+          role: 'turun',
+          badgeLabel: 'Halte Tujuan',
+        },
+      ],
+    },
+  ];
+};

@@ -1,15 +1,16 @@
+import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import HeaderDecoration from '../components/HeaderDecoration';
 import {
-    BellIcon,
-    BusIcon,
-    CampusIcon,
-    HomeIcon,
-    MallIcon,
-    PinIcon,
-    SearchIcon
+  BellIcon,
+  BusIcon,
+  CampusIcon,
+  HomeIcon,
+  MallIcon,
+  PinIcon,
+  SearchIcon
 } from '../components/Icons';
 import MapPreview from '../components/MapPreview';
 import { useAuth } from '../context/AuthContext';
@@ -22,6 +23,7 @@ const favoriteIcons: Record<FavoritePlace['icon'], typeof HomeIcon> = {
 };
 
 export default function HomeScreen() {
+  const router = useRouter();
   const { userName } = useAuth();
 
   return (
@@ -68,14 +70,14 @@ export default function HomeScreen() {
                 Jl. Gajahmada No.II4, Pekunden, Kec. Semarang
               </Text>
             </View>
-            <View className="mt-3 flex-row items-center gap-2 rounded-xl border border-[#b33928]/30 bg-[#b33928]/5 px-3.5 py-3">
+            <TouchableOpacity
+              onPress={() => router.push('/search')}
+              activeOpacity={0.8}
+              className="mt-3 flex-row items-center gap-2 rounded-xl border border-[#b33928]/30 bg-[#b33928]/5 px-3.5 py-3"
+            >
               <SearchIcon size={20} color="#b33928" />
-              <TextInput
-                placeholder="Mau kemana hari ini?"
-                placeholderTextColor="#9CA3AF"
-                className="flex-1 text-sm text-gray-700"
-              />
-            </View>
+              <Text className="flex-1 text-sm text-gray-500">Mau kemana hari ini?</Text>
+            </TouchableOpacity>
           </View>
         </View>
 

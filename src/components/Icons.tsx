@@ -203,3 +203,62 @@ export function CheckBadgeIcon({ size = 20, color = '#111827' }: IconProps) {
     </Svg>
   );
 }
+
+export function ArrowLeftIcon({ size = 24, color = '#111827' }: IconProps) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24">
+      <Path d="M19 12H5" stroke={color} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <Path d="m12 19-7-7 7-7" stroke={color} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </Svg>
+  );
+}
+
+export function ClockIcon({ size = 20, color = '#b33928' }: IconProps) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24">
+      <Circle cx={12} cy={12} r={9} stroke={color} strokeWidth={2} fill="none" />
+      <Path d="M12 7v5l3 2.5" stroke={color} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </Svg>
+  );
+}
+
+export function WalkIcon({ size = 20, color = '#111827' }: IconProps) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24">
+      <Circle cx={13} cy={4} r={2} stroke={color} strokeWidth={1.8} fill="none" />
+      <Path d="m13 6-2 5 3 3-1 6" stroke={color} strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <Path d="m9 11 2-2 3 1 3 4" stroke={color} strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <Path d="m8 17 3-3" stroke={color} strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </Svg>
+  );
+}
+
+export function CheckIcon({ size = 20, color = '#ffffff' }: IconProps) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24">
+      <Path d="m5 13 4 4L19 7" stroke={color} strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </Svg>
+  );
+}
+
+export function LocationIcon({ size = 20, color = '#2563eb' }: IconProps) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24">
+      <Circle cx={12} cy={12} r={8} stroke={color} strokeWidth={1.8} fill="none" />
+      <Circle cx={12} cy={12} r={3.2} fill={color} />
+      <Path d="M12 2v2M12 20v2M2 12h2M20 12h2" stroke={color} strokeWidth={1.8} strokeLinecap="round" />
+    </Svg>
+  );
+}
+
+// Alias for backwards compatibility
+export const LocationDotIcon = LocationIcon;
+
+export function VerticalSwapIcon({ size = 20, color = '#b33928' }: IconProps) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24">
+      <Path d="M8 6v12M8 6l-3 3M8 6l3 3" stroke={color} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <Path d="M16 18V6M16 18l-3-3M16 18l3-3" stroke={color} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </Svg>
+  );
+}
